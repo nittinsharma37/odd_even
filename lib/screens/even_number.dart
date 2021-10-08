@@ -12,6 +12,7 @@ class EvenNumber extends StatefulWidget {
 class _EvenNumberState extends State<EvenNumber> {
   late List<bool?> _isChecked;
   var tmpArray = [];
+  int sum = 0;
 
   // getValue(){
   //  for(int i = 1; i <= _isChecked.length; i++){
@@ -25,6 +26,7 @@ class _EvenNumberState extends State<EvenNumber> {
   @override
   void initState() {
     super.initState();
+    sum = 0;
     _isChecked = List<bool>.filled(widget.evenNumbers.length, false);
   }
 
@@ -45,6 +47,13 @@ class _EvenNumberState extends State<EvenNumber> {
               onChanged: (val) {
                 setState(() {
                   _isChecked[index] = val;
+                  if (val == true) {
+                    sum = sum + widget.evenNumbers[index].toInt();
+                    print(sum);
+                  } else if (val == false) {
+                    sum = sum - widget.evenNumbers[index].toInt();
+                    print(sum);
+                  }
                 });
               },
             ),
@@ -52,11 +61,18 @@ class _EvenNumberState extends State<EvenNumber> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Text("Sum"),
-        onPressed: () {
-          // getValue();
-        },
-      ),
+          child: const Text("Sum"),
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text("sum"),
+                  content: Text(sum.toString()),
+                );
+              },
+            );
+          }),
     );
   }
 }
