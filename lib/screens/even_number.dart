@@ -11,7 +11,7 @@ class EvenNumber extends StatefulWidget {
 
 class _EvenNumberState extends State<EvenNumber> {
   late List<bool?> _isChecked;
-  var tmpArray = [];
+
   int sum = 0;
 
   // getValue(){

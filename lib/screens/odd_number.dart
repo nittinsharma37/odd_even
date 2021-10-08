@@ -11,6 +11,7 @@ class OddNumber extends StatefulWidget {
 
 class _OddNumberState extends State<OddNumber> {
   late List<bool?> _isChecked;
+   int sum = 0;
 
   @override
   void initState() {
@@ -34,7 +35,16 @@ class _OddNumberState extends State<OddNumber> {
               value: _isChecked[index],
               onChanged: (val) {
                 setState(() {
+                 setState(() {
                   _isChecked[index] = val;
+                  if (val == true) {
+                    sum = sum + widget.oddNumbers[index].toInt();
+                    print(sum);
+                  } else if (val == false) {
+                    sum = sum - widget.oddNumbers[index].toInt();
+                    print(sum);
+                  }
+                });
                 });
               },
             ),
@@ -43,7 +53,17 @@ class _OddNumberState extends State<OddNumber> {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Text("Sum"),
-        onPressed: () {},
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text("sum"),
+                  content: Text(sum.toString()),
+                );
+              },
+            );
+        },
       ),
     );
   }
